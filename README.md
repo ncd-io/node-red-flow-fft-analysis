@@ -5,24 +5,24 @@
  You will need to install the fft-js library into your ~/.node-red directory and alter your ~/.node-red/settings.js file.
 
 ### fft-js
-You can find the fft-js library at https://www.npmjs.com/package/fft-js
+You can find the fft-js library at https://www.npmjs.com/package/fft-js<br><br>
 
-Commandline installation is required. You can use the following commands:
-cd ~/.node-red
-npm install fft-js
+Commandline installation is required. You can use the following commands:<br>
+cd ~/.node-red<br>
+npm install fft-js<br>
 
 
 ### settings.js File
-You will need to edit your settings.js file generally located in ~/.node-red/settings.js
+You will need to edit your settings.js file generally located in ~/.node-red/settings.js<br><br>
 
-Replace this section:
-functionGlobalContext: {
-    // os:require('os'),
-},
-with this:
-functionGlobalContext: {
-    fft: require('fft-js').fft,
-    fftUtil: require('fft-js').util
-},
-
+Replace this section:<br>
+functionGlobalContext: {<br>
+    // os:require('os'),<br>
+},<br>
+with this:<br>
+functionGlobalContext: {<br>
+    fft: require('fft-js').fft,<br>
+    fftUtil: require('fft-js').util<br>
+},<br>
+<br>
 Save the file and restart node-red
