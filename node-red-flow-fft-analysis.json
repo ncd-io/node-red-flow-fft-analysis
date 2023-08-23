@@ -2,7 +2,15 @@
     {
         "id": "795cdb52bbd4eb23",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "Type 81 FFT",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4c6816e9d6fe181b",
+        "type": "tab",
+        "label": "Setup Gateway",
         "disabled": false,
         "info": "",
         "env": []
@@ -15,7 +23,7 @@
         "connection": "",
         "unknown_devices": 0,
         "outputs": 1,
-        "x": 170,
+        "x": 250,
         "y": 300,
         "wires": [
             [
@@ -57,13 +65,9 @@
         "amgt_accel": "0",
         "amgt_mag": "0",
         "amgt_gyro": "0",
-        "impact_accel_active": false,
         "impact_accel": "0",
-        "impact_data_rate_active": false,
         "impact_data_rate": "4",
-        "impact_threshold_active": false,
         "impact_threshold": 25,
-        "impact_duration_active": false,
         "impact_duration": 1,
         "activ_interr_x": 1,
         "activ_interr_y": 2,
@@ -83,8 +87,6 @@
         "on_request_timeout_80": "4",
         "sensor_boot_time_420ma_active": false,
         "sensor_boot_time_420ma": "0",
-        "sensor_boot_time_78_active": false,
-        "sensor_boot_time_78": "0",
         "deadband_80_active": "",
         "deadband_80": 0,
         "filter_80_active": true,
@@ -147,13 +149,7 @@
         "payload_length_80": "3",
         "motion_threshold_46_active": false,
         "motion_threshold_46": "100",
-        "low_calibration_420ma_active": false,
-        "low_calibration_420ma": "68805",
-        "mid_calibration_420ma_active": false,
-        "mid_calibration_420ma": "68724",
-        "high_calibration_420ma_active": false,
-        "high_calibration_420ma": "68714",
-        "x": 130,
+        "x": 210,
         "y": 240,
         "wires": [
             [
@@ -175,7 +171,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 480,
+        "x": 560,
         "y": 180,
         "wires": []
     },
@@ -190,7 +186,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 640,
+        "x": 720,
         "y": 240,
         "wires": [
             [
@@ -211,7 +207,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 480,
+        "x": 560,
         "y": 300,
         "wires": []
     },
@@ -228,7 +224,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 820,
+        "x": 900,
         "y": 240,
         "wires": []
     },
@@ -249,12 +245,241 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 470,
+        "x": 550,
         "y": 240,
         "wires": [
             [
                 "453a728dda4a303d"
             ]
         ]
+    },
+    {
+        "id": "22005b637570aee8",
+        "type": "inject",
+        "z": "4c6816e9d6fe181b",
+        "name": "Change settings.js file",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 240,
+        "wires": [
+            [
+                "7821f8b1cc33ab46"
+            ]
+        ]
+    },
+    {
+        "id": "7821f8b1cc33ab46",
+        "type": "file in",
+        "z": "4c6816e9d6fe181b",
+        "name": "",
+        "filename": "/home/ncdio/.node-red/settings.js",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 520,
+        "y": 240,
+        "wires": [
+            [
+                "f9e72f7a460ecfbd"
+            ]
+        ]
+    },
+    {
+        "id": "f9e72f7a460ecfbd",
+        "type": "function",
+        "z": "4c6816e9d6fe181b",
+        "name": "function 1",
+        "func": "msg.payload = msg.payload.replace(\"// os:require('os'),\", \"    fft: require('fft-js').fft, fftUtil: require('fft-js').util\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 240,
+        "wires": [
+            [
+                "8e094927eceeb5f2"
+            ]
+        ]
+    },
+    {
+        "id": "8e094927eceeb5f2",
+        "type": "file",
+        "z": "4c6816e9d6fe181b",
+        "name": "",
+        "filename": "/home/ncdio/.node-red/settings.js",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1160,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5e7593e6dd902fba",
+        "type": "inject",
+        "z": "4c6816e9d6fe181b",
+        "name": "Install fft-js in ~/.node-red",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 320,
+        "wires": [
+            [
+                "63051d4f28be6759"
+            ]
+        ]
+    },
+    {
+        "id": "12d1aea2d309bea3",
+        "type": "inject",
+        "z": "4c6816e9d6fe181b",
+        "name": "Restart Node-Red",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 400,
+        "wires": [
+            [
+                "98af8d7ea24599d5"
+            ]
+        ]
+    },
+    {
+        "id": "63051d4f28be6759",
+        "type": "exec",
+        "z": "4c6816e9d6fe181b",
+        "command": "npm install --prefix ~/.node-red fft-js",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 530,
+        "y": 320,
+        "wires": [
+            [
+                "a47ab22cebab2298"
+            ],
+            [
+                "a47ab22cebab2298"
+            ],
+            [
+                "a47ab22cebab2298"
+            ]
+        ]
+    },
+    {
+        "id": "98af8d7ea24599d5",
+        "type": "exec",
+        "z": "4c6816e9d6fe181b",
+        "command": "pm2 restart all",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 460,
+        "y": 400,
+        "wires": [
+            [
+                "731f406929f345be"
+            ],
+            [
+                "731f406929f345be"
+            ],
+            [
+                "731f406929f345be"
+            ]
+        ]
+    },
+    {
+        "id": "a47ab22cebab2298",
+        "type": "debug",
+        "z": "4c6816e9d6fe181b",
+        "name": "debug 34",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "731f406929f345be",
+        "type": "debug",
+        "z": "4c6816e9d6fe181b",
+        "name": "debug 35",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 400,
+        "wires": []
     }
 ]
